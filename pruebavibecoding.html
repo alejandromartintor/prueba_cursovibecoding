@@ -1,0 +1,374 @@
+import React, { useState, useEffect } from 'react';
+import { 
+  Activity, 
+  Users, 
+  Thermometer, 
+  AlertCircle, 
+  Heart, 
+  Wind, 
+  ShieldAlert, 
+  ChevronDown, 
+  FileText,
+  Stethoscope,
+  BarChart3
+} from 'lucide-react';
+
+// --- Components ---
+
+// 1. Hero Section
+const Hero = () => {
+  return (
+    <div className="relative min-h-screen flex items-center justify-center bg-slate-900 overflow-hidden">
+      {/* Abstract Background Animation */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-32 left-20 w-96 h-96 bg-teal-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+      </div>
+
+      <div className="relative z-10 container mx-auto px-6 text-center">
+        <div className="inline-block mb-4 px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-sm font-semibold tracking-wide uppercase backdrop-blur-sm">
+          Estudio Clínico • Valladolid 2010–2022
+        </div>
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+          VSR en Adultos: <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400">
+            El Enemigo Silencioso
+          </span>
+        </h1>
+        <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto mb-10 font-light">
+          Más allá de una enfermedad infantil. Un estudio de 12 años revela el verdadero perfil de riesgo del Virus Sincitial Respiratorio en adultos hospitalizados.
+        </p>
+        
+        <button 
+          onClick={() => document.getElementById('context').scrollIntoView({ behavior: 'smooth' })}
+          className="group bg-white text-slate-900 hover:bg-blue-50 px-8 py-4 rounded-full font-bold transition-all flex items-center gap-2 mx-auto"
+        >
+          Explorar la Evidencia
+          <ChevronDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
+        </button>
+      </div>
+    </div>
+  );
+};
+
+// 2. Context / Methodology Section
+const Context = () => {
+  return (
+    <section id="context" className="py-20 bg-white">
+      <div className="container mx-auto px-6">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
+              El Mito vs. La Realidad
+            </h2>
+            <p className="text-lg text-slate-600 mb-6 leading-relaxed">
+              Históricamente, el <strong className="text-blue-600">Virus Sincitial Respiratorio (VSR)</strong> se ha considerado una amenaza exclusiva de la pediatría. Sin embargo, la carga de enfermedad en adultos ha sido subestimada sistemáticamente.
+            </p>
+            <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+              Este estudio retrospectivo, realizado en un hospital terciario de Valladolid, analizó datos de más de una década para comparar el perfil clínico de adultos con VSR frente a aquellos con Gripe y COVID-19.
+            </p>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="text-3xl font-bold text-blue-600 mb-1">706</div>
+                <div className="text-sm text-slate-500 font-medium">Pacientes VSR</div>
+              </div>
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="text-3xl font-bold text-amber-500 mb-1">598</div>
+                <div className="text-sm text-slate-500 font-medium">Controles Gripe</div>
+              </div>
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="text-3xl font-bold text-purple-600 mb-1">60</div>
+                <div className="text-sm text-slate-500 font-medium">Controles COVID-19</div>
+              </div>
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="text-3xl font-bold text-slate-700 mb-1">12</div>
+                <div className="text-sm text-slate-500 font-medium">Años de Datos</div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-100 to-teal-50 rounded-3xl transform rotate-3"></div>
+            <div className="relative bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
+              <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                <Stethoscope className="w-6 h-6 text-teal-500" />
+                Objetivo del Estudio
+              </h3>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <div className="mt-1 w-2 h-2 rounded-full bg-teal-500 flex-shrink-0" />
+                  <p className="text-slate-600">Caracterizar el perfil de riesgo en adultos hospitalizados.</p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="mt-1 w-2 h-2 rounded-full bg-teal-500 flex-shrink-0" />
+                  <p className="text-slate-600">Comparar la gravedad clínica con la Gripe estacional y el COVID-19.</p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="mt-1 w-2 h-2 rounded-full bg-teal-500 flex-shrink-0" />
+                  <p className="text-slate-600">Identificar factores de riesgo de hospitalización y mortalidad.</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// 3. Interactive Data Section
+const DataComparison = () => {
+  const [activeTab, setActiveTab] = useState('comorbidities');
+
+  const data = {
+    comorbidities: {
+      title: "Carga de Comorbilidades",
+      description: "Los pacientes con VSR presentaron una carga de enfermedad de base significativamente mayor.",
+      stats: [
+        { label: "Condiciones Cardiovasculares", rsv: 81, flu: 65, covid: 45, unit: "%" },
+        { label: "Enfermedad Pulmonar Crónica", rsv: 46, flu: 35, covid: 20, unit: "%" },
+        { label: "Inmunocompromiso", rsv: 43, flu: 30, covid: 15, unit: "%" },
+      ]
+    },
+    symptoms: {
+      title: "Presentación Clínica",
+      description: "El VSR mostró una mayor propensión a afectar las vías respiratorias inferiores.",
+      stats: [
+        { label: "Signos Respiratorios Inferiores", rsv: 92, flu: 85, covid: 72, unit: "%" },
+        { label: "Signos Cardiovasculares", rsv: 27, flu: 20, covid: 8, unit: "%" },
+        { label: "Coinfección Bacteriana", rsv: 36, flu: 21, covid: 20, unit: "%" },
+      ]
+    },
+    outcomes: {
+      title: "Resultados y Gravedad",
+      description: "Aunque la mortalidad es similar a la gripe, afecta desproporcionadamente a los más vulnerables.",
+      stats: [
+        { label: "Mortalidad Intra-hospitalaria", rsv: 6.5, flu: 5.8, covid: 10.2, unit: "%" },
+        { label: "Mortalidad en >80 años", rsv: 8.9, flu: 7.5, covid: 15.0, unit: "%" },
+      ]
+    }
+  };
+
+  const currentData = data[activeTab];
+
+  return (
+    <section className="py-24 bg-slate-50">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+            Comparativa de Impacto
+          </h2>
+          <p className="text-slate-600 max-w-2xl mx-auto">
+            Explora los datos para entender cómo se diferencia el VSR de otros virus respiratorios comunes.
+          </p>
+        </div>
+
+        {/* Tabs */}
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          {[
+            { id: 'comorbidities', icon: Heart, label: 'Comorbilidades' },
+            { id: 'symptoms', icon: Activity, label: 'Signos Clínicos' },
+            { id: 'outcomes', icon: ShieldAlert, label: 'Resultados' }
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all shadow-sm
+                ${activeTab === tab.id 
+                  ? 'bg-blue-600 text-white shadow-blue-200 ring-2 ring-blue-600 ring-offset-2' 
+                  : 'bg-white text-slate-600 hover:bg-slate-100'}`}
+            >
+              <tab.icon className="w-4 h-4" />
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Visualization Card */}
+        <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 border border-slate-100 max-w-4xl mx-auto">
+          <div className="mb-8">
+            <h3 className="text-2xl font-bold text-slate-800 mb-2">{currentData.title}</h3>
+            <p className="text-slate-500">{currentData.description}</p>
+          </div>
+
+          <div className="space-y-10">
+            {currentData.stats.map((stat, idx) => (
+              <div key={idx} className="relative">
+                <div className="flex justify-between mb-2">
+                  <span className="font-semibold text-slate-700">{stat.label}</span>
+                </div>
+                
+                {/* Comparison Bars */}
+                <div className="space-y-3">
+                  {/* RSV Bar */}
+                  <div className="group relative">
+                    <div className="flex items-center gap-3">
+                      <span className="w-12 text-xs font-bold text-slate-400">VSR</span>
+                      <div className="flex-grow bg-slate-100 rounded-full h-4 overflow-hidden">
+                        <div 
+                          className="bg-blue-500 h-full rounded-full transition-all duration-1000 ease-out flex items-center justify-end pr-2"
+                          style={{ width: `${stat.rsv}%` }}
+                        >
+                        </div>
+                      </div>
+                      <span className="w-12 text-sm font-bold text-blue-600">{stat.rsv}{stat.unit}</span>
+                    </div>
+                  </div>
+
+                  {/* Flu Bar */}
+                  <div className="group relative">
+                    <div className="flex items-center gap-3">
+                      <span className="w-12 text-xs font-bold text-slate-400">Gripe</span>
+                      <div className="flex-grow bg-slate-100 rounded-full h-4 overflow-hidden">
+                        <div 
+                          className="bg-amber-400 h-full rounded-full transition-all duration-1000 ease-out flex items-center justify-end pr-2 opacity-80"
+                          style={{ width: `${stat.flu}%` }}
+                        >
+                        </div>
+                      </div>
+                      <span className="w-12 text-sm font-bold text-amber-500">{stat.flu}{stat.unit}</span>
+                    </div>
+                  </div>
+
+                   {/* COVID Bar */}
+                   <div className="group relative">
+                    <div className="flex items-center gap-3">
+                      <span className="w-12 text-xs font-bold text-slate-400">COVID</span>
+                      <div className="flex-grow bg-slate-100 rounded-full h-4 overflow-hidden">
+                        <div 
+                          className="bg-purple-400 h-full rounded-full transition-all duration-1000 ease-out flex items-center justify-end pr-2 opacity-80"
+                          style={{ width: `${stat.covid}%` }}
+                        >
+                        </div>
+                      </div>
+                      <span className="w-12 text-sm font-bold text-purple-500">{stat.covid}{stat.unit}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 pt-6 border-t border-slate-100 text-xs text-slate-400 flex flex-col md:flex-row gap-4 justify-between items-center">
+            <p>Datos basados en la cohorte de Valladolid (2010-2022).</p>
+            <div className="flex gap-4">
+              <div className="flex items-center gap-1"><div className="w-3 h-3 rounded-full bg-blue-500"></div> VSR</div>
+              <div className="flex items-center gap-1"><div className="w-3 h-3 rounded-full bg-amber-400"></div> Gripe</div>
+              <div className="flex items-center gap-1"><div className="w-3 h-3 rounded-full bg-purple-400"></div> COVID-19</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// 4. Key Findings / Cards
+const Findings = () => {
+  const cards = [
+    {
+      icon: Users,
+      title: "El Paciente Frágil",
+      content: "El perfil típico del paciente VSR es mayor y con más patologías previas que el de Gripe o COVID. El 81% tenía enfermedades cardiovasculares."
+    },
+    {
+      icon: Wind,
+      title: "Impacto Pulmonar",
+      content: "El 92% de los pacientes con VSR mostraron signos de infección respiratoria inferior, significativamente más alto que en gripe (85%) o COVID (72%)."
+    },
+    {
+      icon: AlertCircle,
+      title: "Factores de Riesgo",
+      content: "Fumar, tener EPOC o enfermedades cardíacas no solo aumentan el riesgo de hospitalización, sino que predicen una peor evolución."
+    }
+  ];
+
+  return (
+    <section className="py-20 bg-white">
+      <div className="container mx-auto px-6">
+        <h2 className="text-3xl font-bold text-slate-900 mb-12 text-center">Conclusiones Clave</h2>
+        <div className="grid md:grid-cols-3 gap-8">
+          {cards.map((card, idx) => (
+            <div key={idx} className="group p-8 rounded-2xl bg-white border border-slate-200 hover:border-blue-200 hover:shadow-xl transition-all hover:-translate-y-1">
+              <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-500 transition-colors">
+                <card.icon className="w-7 h-7 text-blue-600 group-hover:text-white transition-colors" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-800 mb-4">{card.title}</h3>
+              <p className="text-slate-600 leading-relaxed">{card.content}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// 5. Conclusion & Footer
+const Footer = () => {
+  return (
+    <footer className="bg-slate-900 text-slate-300 py-16">
+      <div className="container mx-auto px-6">
+        <div className="grid md:grid-cols-2 gap-12 mb-16 border-b border-slate-800 pb-12">
+          <div>
+            <h2 className="text-3xl font-bold text-white mb-6">Implicaciones Clínicas</h2>
+            <p className="mb-4 text-lg">
+              Los resultados subrayan la urgencia de considerar el VSR en el diagnóstico diferencial de adultos mayores, especialmente aquellos con comorbilidades cardíacas.
+            </p>
+            <p className="text-lg">
+              La prevención mediante vacunación y la detección temprana son herramientas cruciales para reducir la carga hospitalaria.
+            </p>
+          </div>
+          <div className="bg-slate-800 p-8 rounded-2xl">
+            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+              <FileText className="w-5 h-5 text-blue-400" />
+              Cita APA
+            </h3>
+            <p className="font-mono text-sm text-slate-400 leading-relaxed bg-slate-900/50 p-4 rounded-lg border border-slate-700">
+              Haeberer, M., Mengel, M., Fan, R., Toquero-Asensio, M., Martin-Toribio, A., Liu, Q., ... & Castrodeza Sanz, J. (2024). RSV Risk Profile in Hospitalized Adults and Comparison with Influenza and COVID-19 Controls in Valladolid, Spain, 2010–2022. <em>Infectious Diseases and Therapy</em>. https://doi.org/10.1007/s40121-024-01021-1
+            </p>
+          </div>
+        </div>
+        <div className="text-center text-sm text-slate-500">
+          <p>Diseñado con base en evidencia científica. © {new Date().getFullYear()} Resumen Divulgativo.</p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+// Main App Component
+const App = () => {
+  // Simple scroll progress bar
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollTop;
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scroll = `${totalScroll / windowHeight}`;
+      setScrollProgress(Number(scroll));
+    }
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <div className="font-sans text-slate-900 bg-white selection:bg-blue-100 selection:text-blue-900">
+      {/* Scroll Progress Bar */}
+      <div 
+        className="fixed top-0 left-0 h-1.5 bg-gradient-to-r from-blue-500 to-teal-400 z-50 transition-all duration-100"
+        style={{ width: `${scrollProgress * 100}%` }}
+      />
+      
+      <Hero />
+      <Context />
+      <DataComparison />
+      <Findings />
+      <Footer />
+    </div>
+  );
+};
+
+export default App;
